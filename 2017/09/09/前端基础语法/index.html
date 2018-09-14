@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>前端基础语法 | ICH</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,前端">
+    <meta name="description" content="CSS CSS选择器  标签选择器，标签名{}，作用于所有此标签。  类选择器， .class{}，在标签内定义class=””，属图形结构。  ID选择器，#ID{}, 在标签内定义id=””，有严格的一一对应关系。  类和ID选择器的区别1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。2, 可以使用类选择器词">
+<meta name="keywords" content="Android,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础语法">
+<meta property="og:url" content="http://icuihai.com/2017/09/09/前端基础语法/index.html">
+<meta property="og:site_name" content="ICH">
+<meta property="og:description" content="CSS CSS选择器  标签选择器，标签名{}，作用于所有此标签。  类选择器， .class{}，在标签内定义class=””，属图形结构。  ID选择器，#ID{}, 在标签内定义id=””，有严格的一一对应关系。  类和ID选择器的区别1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。2, 可以使用类选择器词">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+<meta property="og:image" content="http://icuihai.com/2017/07/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/myimage.gif">
+<meta property="og:updated_time" content="2018-03-15T08:42:55.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端基础语法">
+<meta name="twitter:description" content="CSS CSS选择器  标签选择器，标签名{}，作用于所有此标签。  类选择器， .class{}，在标签内定义class=””，属图形结构。  ID选择器，#ID{}, 在标签内定义id=””，有严格的一一对应关系。  类和ID选择器的区别1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。2, 可以使用类选择器词">
+<meta name="twitter:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">icuihai</h5>
+          <a href="mailto:icuihai@gmail.com" title="icuihai@gmail.com" class="mail">icuihai@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/icuihai" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/icuihai" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端基础语法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端基础语法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-09T02:00:03.000Z" itemprop="datePublished" class="page-time">
+  2017-09-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/blog/">blog</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-前端基础语法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端基础语法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-09 10:00:03" datetime="2017-09-09T02:00:03.000Z"  itemprop="datePublished">2017-09-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/blog/">blog</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>CSS</p>
+<p>CSS选择器</p>
+<ul>
+<li><p>标签选择器，标签名{}，作用于所有此标签。</p>
+</li>
+<li><p>类选择器， .class{}，在标签内定义class=””，属图形结构。</p>
+</li>
+<li><p>ID选择器，#ID{}, 在标签内定义id=””，有严格的一一对应关系。</p>
+</li>
+<li><p>类和ID选择器的区别<br>1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。<br>2, 可以使用类选择器词列表方法为一个元素同时设置多个样式。我们可以为一个元素同时设多个样式，但只可以用类选择器的方法实现，ID选择器是不可以的（不能使用 ID 词列表）。</p>
+</li>
+<li><p>子选择器， .span&gt;li{}，作用于父元素span类下一层的li标签。</p>
+</li>
+<li><p>包含选择器，.span li{}，作用于父元素span下所有li标签。</p>
+</li>
+<li><p>伪类选择符 ，a:hover{color:red;}; 比如说我们给html中一个标签元素的鼠标滑过的状态来设置字体颜色：</p>
+</li>
+<li><p>通用选择器，{}，匹配所有html的标签元素 伪类选择符：它允许给html不存在的标签(标签的某种状态)设置样式，比如说我们给html中的一个标签元素的鼠标滑过的状态来设置字体颜色。</p>
+</li>
+<li><p>分组选择符,当你想为html中多个标签元素设置同一个样式时，可以使用分组选择符（，）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br><span class="line"><span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>继承</p>
+<p>CSS的某些样式是可以继承的，继承就是一种规则，它允许样式不仅应用于某个特定html标签元素，而且还应用于其后代。</p>
+<p>注意：比如border,solid是不具备继承特性的</p>
+<p>特殊性</p>
+<p>有的时候我们为同一个元素设置了不同的CSS样式代码，那么元素会启用哪一个CSS样式呢?</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1,p&#123;color:red;&#125; /权值为1/</span><br><span class="line">2,p span&#123;color:green;&#125; /权值为1+1=2/</span><br><span class="line">3,.warning&#123;color:white;&#125; /权值为10/</span><br><span class="line">4,p span.warning&#123;color:purple;&#125; /权值为1+1+10=12/</span><br><span class="line">5,#footer .note p&#123;color:yellow;&#125; /权值为100+10+1=111/</span><br></pre></td></tr></table></figure>
+<p>注意：还有一个权值比较特殊–继承也有权值但很低，有的文献提出它只有0.1，所以可以理解为继承的权值最低。</p>
+<p>层叠</p>
+<p>层叠就是在html文件中对于同一个元素可以有多个css样式存在，当有相同权重的样式存在时，会根据这些css样式的前后顺序来决定，处于最后面的css样式会被应用。</p>
+<p>重要性</p>
+<p>我们在做网页代码的时，有些特殊的情况需要为某些样式设置具有最高权值，怎么办？这时候我们可以使用!important来解决</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:red<span class="meta">!important</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>文字排版</p>
+<p>字体</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-family</span>:<span class="string">"宋体"</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>字号</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-size</span>:<span class="number">12px</span>;<span class="attribute">color</span>:<span class="number">#666</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>粗体</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> <span class="selector-tag">span</span>&#123;<span class="attribute">font-weight</span>:bold;&#125;</span><br></pre></td></tr></table></figure>
+<p>斜体</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> <span class="selector-tag">a</span>&#123;<span class="attribute">font-style</span>:italic;&#125;</span><br></pre></td></tr></table></figure>
+<p>下划线</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> <span class="selector-tag">a</span>&#123;<span class="attribute">text-decoration</span>:underline;&#125;</span><br></pre></td></tr></table></figure>
+<p>删除线</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.oldPrice</span>&#123;<span class="attribute">text-decoration</span>:line-through;&#125;</span><br></pre></td></tr></table></figure>
+<p>缩进</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">text-indent</span>:<span class="number">2em</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>行间距</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">line-height</span>:<span class="number">1.5em</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>中文字间距，字母间距</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span><br><span class="line"><span class="attribute">letter-spacing</span>:<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：这个样式使用在英文单词时，是设置字母与字母之间的间距。</p>
+<p>对齐</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">text-align</span>:center;&#125;</span><br></pre></td></tr></table></figure>
+<p>元素分类</p>
+<p>块状元素、内联元素(又叫行内元素)和内联块状元素。</p>
+<p>认识标签</p>
+<ul>
+<li><p>标签是没有语义的，他的作用就是为了设置单独的样式用的</p>
+</li>
+<li><p>*和** 标签是为了强调一段话中的关键字时使用，他的语义是强调比如：</p><p><br>java,php,js<br></p><p><br>上面这段代码如果想让”php”变色，则 </p><p><br>java,<span>php<span>,js<br><p><br>span{<br> color:blue;<br>}</p>
+<hr>
+</span></span></p></li>
+<li><p>标签，短文本引用</p>
+</li>
+<li><blockquote>
+<p>标签，长文本引用</p>
+</blockquote>
+</li>
+<li><p>​</p>
+<p>换行, 与以前我们学过的标签不一样，</p>
+<p>​</p>
+<p>标签是一个空标签，没有HTML内容的标签就是空标签，空标签只需要写一个开始标签，这样的标签有</p>
+<p>​</p>
+<p>、</p>
+<hr>
+<p>和</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>。 在java中是 \n,</p>
+</li>
+<li><p>空格</p>
+</li>
+</ul>
+<hr>
+<p>  标签，添加水平横线</p>
+<ul>
+<li><p>联系地址信息</p>
+</li>
+<li><p><code>标签 加入一行代码</code></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标签。加入多行代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><ul>
+<li><p>列表标签，没有前后顺序的</p>
+</li>
+<li><ol>
+<li><p>列表标签，有前后顺序的</p>
+</li>
+<li><p>相当于一个容器，基本就是划分出一个独立的逻辑部分</p>
+</li>
+<li><p>table标签，认识网页上的表格，创建表格的四个元素：</p>
+<p>​</p>
+<p>table、tbody、tr、th、td</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>班级<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>学生数<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>平均成绩<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>一班<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>30<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>89<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>二班<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>35<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>85<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>三班<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>32<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>80<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">班级    学生数    平均成绩</span><br><span class="line">一班30    89</span><br><span class="line">二班35    85</span><br><span class="line">三班32    80</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>caption标签，为表格添加标题和摘要 summary=”表格简介文本”</p>
+</li>
+<li><p>click here!<br>_blank表示在新建的浏览器窗口打开链接</p>
+</li>
+<li><p>欢迎给我发送邮件一起交流</p>
+</li>
+<li><p>[<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://icuihai.com/2017/07/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/myimage.gif" alt="My Image](http://icuihai.com/2017/07/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/myimage.gif)My Image" title="">
+                </div>
+                <div class="image-caption">My Image](http://icuihai.com/2017/07/06/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/myimage.gif)My Image</div>
+            </figure>插入图片</p>
+</li>
+<li><p>网站怎样与用户进行交互？答案是使用HTML表单(form)。表单是可以把浏览者输入的数据传送到服务器端，这样服务器端程序就可以处理表单传过来的数据。</p>
+</li>
+<li><p>使用单选框、复选框，</p>
+</li>
+<li><p>使用下拉列表。</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myarray=<span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> myarray=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">8</span>); <span class="comment">//创建数组，可以存放8个数据</span></span><br><span class="line"><span class="keyword">var</span> myarray = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">66</span>,<span class="number">80</span>,<span class="number">90</span>,<span class="number">77</span>,<span class="number">59</span>);<span class="comment">//创建数组同时赋值，同时也可以这写</span></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">55</span>,<span class="number">32</span>,<span class="number">5</span>,<span class="number">90</span>,<span class="number">60</span>,<span class="number">98</span>,<span class="number">76</span>,<span class="number">54</span>];</span><br></pre></td></tr></table></figure>
+<p>JS</p>
+<p>二维数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Myarr = [[<span class="number">0</span> , <span class="number">1</span> , <span class="number">2</span> ],[<span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
+<p>事件</p>
+<p>JavaScript内置对象</p>
+<p>JavaScript 中的所有事物都是对象，如:字符串、数值、数组、函数等，每个对象带有属性和方法，这一点与java还是有区别的，但是java对象我们都会，js对象还在话下吗~~</p>
+<ul>
+<li><p>Date事件对象</p>
+</li>
+<li><p>字符串对象</p>
+<p>​</p>
+<p>在js中字符串也称为对象（神奇吧），比如说 var mystr=”Hello World” var my=mystr.length;最终记过就是12，只是在java中我们不叫做对象罢了，但写法还是大同小异的。</p>
+<ul>
+<li>stringObject.charAt(index) 返回指定位置的字符</li>
+<li>stringObject.indexOf(substring, startpos) 返回某个指定的字符串值在字符串中首次出现的位置。</li>
+<li>stringObject.split(separator,limit) 方法将字符串分割为字符串数组，并返回此数组</li>
+<li>stringObject.substring(startPos,stopPos) 提取字符串中介于两个指定下标之间的字符。</li>
+<li>stringObject.substr(startPos,length) 从字符串中提取从 startPos位置开始的指定数目的字符串。比如</li>
+</ul>
+</li>
+<li><p>Math对象</p>
+<p>​</p>
+<p>Math对象，提供对数据的数学计算。</p>
+<ul>
+<li>向上取整ceil() ,向下取整floor(),四舍五入round(),随机数 random()</li>
+<li>数组连接concat() 不知道是不是我菜，反正我认识的java是没有这个概念的。</li>
+<li>指定分隔符连接数组元素join()<br>用于把数组中的所有元素放入一个字符串。元素是通过指定的分隔符进行分隔的。<br>arrayObject.join(分隔符)</li>
+<li>颠倒数组元素顺序reverse()</li>
+<li>选定元素slice()</li>
+<li>数组排序sort()</li>
+</ul>
+</li>
+</ul>
+<p>浏览器对象</p>
+<ul>
+<li>setInterval(代码,交互时间);在执行时,从载入页面后每隔指定的时间执行代码。</li>
+<li>clearInterval(id_of_setInterval) 方法可取消由 setInterval() 设置的交互时间。</li>
+<li>setTimeout(代码,延迟时间);在载入后延迟指定时间后,去执行一次表达式,仅执行一次。</li>
+</ul>
+<p>History对象</p>
+<ul>
+<li>window.history.back();back()方法，加载 history 列表中的前一个 URL。相当于window.history.go(-1);</li>
+<li>window.history.forward();forward()方法，加载 history 列表中的下一个 URL。相当于window.history.go(1);</li>
+<li>window.history.go(number);参数说明：1后一个页面，0当前页面，-1前一个页面</li>
+</ul>
+<p>Location对象</p>
+<p>Navigator对象</p>
+<p>screen对象</p>
+<p>window.screen 对象包含有关用户屏幕的信息。</p>
+<ol>
+<li>screen.height 返回屏幕分辨率的高</li>
+<li>screen.width 返回屏幕分辨率的宽</li>
+<li>screen.availWidth 属性返回访问者屏幕的宽度，以像素计，减去界面特性，比如任务栏。</li>
+<li>screen.availHeight 属性返回访问者屏幕的高度，以像素计，减去界面特性，比如任务栏。</li>
+</ol>
+<p>DOM</p>
+<p>官方解释：文档对象模型（Document Object Model） 定义访问和处理HTML文档的标准方法。DOM将HTML文档呈现为带有元素，属性和文本的树结构（节点树）。</p>
+<ul>
+<li>document.getElementById(Id) 返回带有指定名称id的节点对象的集合(通过Id)</li>
+<li>document.getElementsByName(name) 返回带有指定名称的节点对象的集合(通过name)</li>
+<li>document.getElementsByTagName(Tagname) 返回带有指定标签名的节点对象的ed集合,返回元素顺序是他们在文档中的顺序(通过标签名)</li>
+<li>elementNode.getAttribute(name) 通过元素节点的属性名称获取属性的值</li>
+<li>elementNode.setAttribute(name,value) 增加一个指定名称和值得新属性，或者把现有的属性设定为指定的值</li>
+</ul>
+<p>节点属性</p>
+<ul>
+<li>nodeNam 节点的名称</li>
+<li>nodeValue 节点的值</li>
+<li>nodeType 节点的类型</li>
+<li>node.firstChild node.lastChild访问子节点的第一和最后一项</li>
+<li>elementNode.parentNode 获取指定节点的父节点</li>
+<li>nodeObject.nextSibling nodeObject.previousSibling 返回某个节点之后和之前紧跟的节点</li>
+<li>appendChild(newnode) 插入节点。documentElement(“p”) 首先要先创造一个节点呢;</li>
+<li>insertBefore(newnode,node) 可在已有的节点前插入一个新的子节点</li>
+<li>removeChild(node) 从子节点列表中删除某个节点，删除成功则返回该节点，失败则返回null<br>注意: 把删除的子节点赋值给 x，这个子节点不在DOM树中，但是还存在内存中，可通过 x 操作。 如果要完全删除对象，给 x 赋 null 值</li>
+<li>node.replaceChild(newnode,oldnew) 实现子节点的替换，返回被替换对象的引用</li>
+<li>createTextNode(data) 创建新的文本节点，返回新创建的Text节点</li>
+</ul>
+<p>尺寸</p>
+<ul>
+<li>offsetHeight和offsetWidth，获取网页内容高度和宽度(包括滚动条等边线，会随窗口的显示大小改变)。</li>
+<li>window.innerHeight - 浏览器窗口的内部高度</li>
+<li>scrollHeight和scrollWidth，获取网页内容高度和宽度。</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-03-15T08:42:55.730Z" itemprop="dateUpdated">2018-03-15 16:42:55</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/09/09/前端基础语法/" target="_blank" rel="external">http://icuihai.com/2017/09/09/前端基础语法/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://icuihai.com">
+            <img src="/img/avatar.jpg" alt="icuihai">
+            icuihai
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://icuihai.com/2017/09/09/前端基础语法/&title=《前端基础语法》 — ICH&pic=http://icuihai.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://icuihai.com/2017/09/09/前端基础语法/&title=《前端基础语法》 — ICH&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://icuihai.com/2017/09/09/前端基础语法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端基础语法》 — ICH&url=http://icuihai.com/2017/09/09/前端基础语法/&via=http://icuihai.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://icuihai.com/2017/09/09/前端基础语法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/10/13/Kotlin语法糖/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Kotlin语法糖</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/22/Android事件分发理解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android事件分发理解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>icuihai &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://icuihai.com/2017/09/09/前端基础语法/&title=《前端基础语法》 — ICH&pic=http://icuihai.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://icuihai.com/2017/09/09/前端基础语法/&title=《前端基础语法》 — ICH&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://icuihai.com/2017/09/09/前端基础语法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端基础语法》 — ICH&url=http://icuihai.com/2017/09/09/前端基础语法/&via=http://icuihai.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://icuihai.com/2017/09/09/前端基础语法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://icuihai.com/2017/09/09/前端基础语法/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
