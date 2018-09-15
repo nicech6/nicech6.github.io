@@ -1,19 +1,310 @@
-extends includes/layout.pug
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="概述Toast作为Android应用中最常见的一种提示方式，由于简单的api设计和简洁的交互体验被我们广泛使用，但是这并代表他很完美，本文将记录我在开发中遇到的问题。
+背景最近项目好多用户反应有bug，然后看log出现了一个奇怪的问题，而且次数不很多，如下：
+123456789101112#1664">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="icuihai">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Android7.1.1Toast崩溃解决方案"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="ICH"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Android7.1.1Toast崩溃解决方案 - ICH</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
 
 
-block TOC
-	aside#toc-column
-		//- 这个block的渲染与否取决于当前视窗的宽度，具体的控制在scss文件里头实现。
-		#toc-column-inner-wrapper
-			- var contentsOptions = {list_number: theme.toc.list_number_on};
-			#post-toc!= toc(page.content, contentsOptions)
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="ICH">
+            <img src="http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg" class="dib h3" alt="ICH">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/" 
+                    title="Home">
+                    Home
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/archives" 
+                    title="Archives">
+                    Archives
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/tags" 
+                    title="Tags">
+                    Tags
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/categories" 
+                    title="Categories">
+                    Categories
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/about.html" 
+                    title="About">
+                    About
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/contact.html" 
+                    title="Contact">
+                    Contact
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Android7.1.1Toast崩溃解决方案</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-06-27</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/Android/">#Android</a> <a class="fw3 ph1 dib" href="/tags/Toast/">#Toast</a>
+                            </div>
+                        </div>
+                    
+
+                    <!-- Main Post Content -->
+                    <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Toast作为Android应用中最常见的一种提示方式，由于简单的api设计和简洁的交互体验被我们广泛使用，但是这并代表他很完美，本文将记录我在开发中遇到的问题。</p>
+<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>最近项目好多用户反应有bug，然后看log出现了一个奇怪的问题，而且次数不很多，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#1664 android.view.WindowManager$BadTokenException</span><br><span class="line">Unable to add window -- window android.view.ViewRootImpl$W@4a51004 has already been added</span><br><span class="line">android.view.ViewRootImpl.setView(ViewRootImpl.java:695)</span><br><span class="line">android.view.ViewRootImpl.setView(ViewRootImpl.java:691)</span><br><span class="line">android.view.WindowManagerGlobal.addView(WindowManagerGlobal.java:342)</span><br><span class="line">android.view.WindowManagerImpl.addView(WindowManagerImpl.java:94)</span><br><span class="line">android.widget.Toast$TN.handleShow(Toast.java:506)</span><br><span class="line">android.widget.Toast$TN$2.handleMessage(Toast.java:389)</span><br><span class="line">android.os.Handler.dispatchMessage(Handler.java:102)</span><br><span class="line">android.os.Looper.loop(Looper.java:154) android.app.ActivityThread.main(ActivityThread.java:6292) java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:906)</span><br><span class="line">com.android.internal.os.ZygoteInit.main(ZygoteInit.java:796)</span><br></pre></td></tr></table></figure>
+<p>然后发现居然都是7.1.1设备才出现的，见下图：</p>
+<p><img src="http://p6nix480q.bkt.clouddn.com/18-6-27/70392299.jpg" alt=""></p>
+<h5 id="Toast显示与隐藏"><a href="#Toast显示与隐藏" class="headerlink" title="Toast显示与隐藏"></a>Toast显示与隐藏</h5><p>首先Toast显示依赖于一个窗口，这个窗口被WMS管理（WindowManagerService），当需要show的时候这个请求会放在WMS请求队列中，并且会传递一个TN类型的Bider对象给WMS，WMS并生成一个token传递给Android进行显示与隐藏，但是如果UI线程的某个线程发生了阻塞，并且已经NotificationManager检测已经超时就不删除token记录，此时token已经过期，阻塞结束的时候再显示的时候就发生了异常。</p>
+<p>在android7.1.1的Toast源码handleShow是这样写的:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mWM.addView(mView, mParams);</span><br></pre></td></tr></table></figure>
+<p>而在8.0则是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">                   mWM.addView(mView, mParams);</span><br><span class="line">                   trySendAccessibilityEvent();</span><br><span class="line">               &#125; catch (WindowManager.BadTokenException e) &#123;</span><br><span class="line">                   /* ignore */</span><br><span class="line">               &#125;</span><br></pre></td></tr></table></figure>
+<p>到这里能看到在发生异常的时候使用了try catch捕获，程序不会挂掉</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> CH</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/6/26</span></span><br><span class="line"><span class="comment"> * 部分7.1.1手机崩溃Toast解决方案</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToastCompat</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Field sField_TN;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Field sField_TN_Handler;</span><br><span class="line">    <span class="keyword">private</span> Toast mToast;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            sField_TN = Toast.class.getDeclaredField(<span class="string">"mTN"</span>);</span><br><span class="line">            sField_TN.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            sField_TN_Handler = sField_TN.getType().getDeclaredField(<span class="string">"mHandler"</span>);</span><br><span class="line">            sField_TN_Handler.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hook</span><span class="params">(Toast toast)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Object tn = sField_TN.get(toast);</span><br><span class="line">            Handler preHandler = (Handler) sField_TN_Handler.get(tn);</span><br><span class="line">            sField_TN_Handler.set(tn, <span class="keyword">new</span> SafelyHandlerWarpper(preHandler));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">(Context context, CharSequence cs, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mToast == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mToast = Toast.makeText(context, cs, length);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mToast.setText(cs);</span><br><span class="line">        &#125;</span><br><span class="line">        hook(mToast);</span><br><span class="line">        mToast.show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SafelyHandlerWarpper</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> Handler impl;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SafelyHandlerWarpper</span><span class="params">(Handler impl)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.impl = impl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatchMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">super</span>.dispatchMessage(msg);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            impl.handleMessage(msg);<span class="comment">//需要委托给原Handler执行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单来说就是通过反射注入在发生异常的地方进行try catch</p>
+<p>声明：此解决方案参考QQ音乐团队</p>
+<p><a href="http://www.itboth.com/d/jiY73qyeAzei/api-java-toast-android" target="_blank" rel="noopener">http://www.itboth.com/d/jiY73qyeAzei/api-java-toast-android</a></p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/Android/">#Android</a> <a class="fw3 ph1 dib" href="/tags/Toast/">#Toast</a>
+                        </div>
+                    
+
+                    <!-- Comments -->
+                    
 
 
 
-block mainContent
-	main#main-content-column
-		#main-content-wrapper
-			#post-full-content!= page.content
-			include includes/post-tags
-			include includes/post-categories
-		
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="icuihai">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            My name is Jonathan Klughertz and this is my blog.<br>I am a full stack software engineer with a strong front-end focus.<br> I currently live and work in Singapore, hit me up if you are in the region.
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/07/19/全网最清晰的ConstraintLayout教程/">全网最清晰的ConstraintLayout教程</a>
+        </p>
+    
+        <p>
+            <a href="/2018/06/27/Android7-1-1Toast崩溃解决方案/">Android7.1.1Toast崩溃解决方案</a>
+        </p>
+    
+        <p>
+            <a href="/2018/04/04/编译Android下可执行命令的FFmpeg/">编译Android下可执行命令的FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/30/交叉编译-Mac环境使用NDK编译FFmpeg/">交叉编译-Mac环境使用NDK编译FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/15/使用Hexo搭建免费Blog/">使用Hexo搭建免费Blog</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://github.com/klugjo/hexo-theme-anodyne" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
+                            <i class="fa fa-500px"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:test@example.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

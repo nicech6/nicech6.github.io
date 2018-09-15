@@ -1,19 +1,363 @@
-extends includes/layout.pug
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="概述上篇文章我们在Mac端交叉编译出来了so文件，但是这个so文件现在还不能直接在Android中使用的，所以说如果想在Android端使用命令执行FFmpeg剪辑音视频文件等，还需要在编译出适合Android的so文件。
+说明在Android端编译so文件有两种方式，一种是比较传统的ndk-bui">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="icuihai">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="编译Android下可执行命令的FFmpeg"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="ICH"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>编译Android下可执行命令的FFmpeg - ICH</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
 
 
-block TOC
-	aside#toc-column
-		//- 这个block的渲染与否取决于当前视窗的宽度，具体的控制在scss文件里头实现。
-		#toc-column-inner-wrapper
-			- var contentsOptions = {list_number: theme.toc.list_number_on};
-			#post-toc!= toc(page.content, contentsOptions)
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="ICH">
+            <img src="http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg" class="dib h3" alt="ICH">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/" 
+                    title="Home">
+                    Home
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/archives" 
+                    title="Archives">
+                    Archives
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/tags" 
+                    title="Tags">
+                    Tags
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/categories" 
+                    title="Categories">
+                    Categories
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/about.html" 
+                    title="About">
+                    About
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/contact.html" 
+                    title="Contact">
+                    Contact
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">编译Android下可执行命令的FFmpeg</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-04-04</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/FFmpeg/">#FFmpeg</a> <a class="fw3 ph1 dib" href="/tags/JNI/">#JNI</a>
+                            </div>
+                        </div>
+                    
+
+                    <!-- Main Post Content -->
+                    <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>上篇文章我们在Mac端交叉编译出来了so文件，但是这个so文件现在还不能直接在Android中使用的，所以说如果想在Android端使用命令执行FFmpeg剪辑音视频文件等，还需要在编译出适合Android的so文件。</p>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>在Android端编译so文件有两种方式，一种是比较传统的ndk-build方式，另外一种是AS2.2后比较推荐的CMake,当然这两种只是使用方式稍微有点不一样，但是结果是一样的。本文使用第一种方式，以下内容默认你已经了解NDK开发步骤并且交叉编译出了so文件，如果没有请先看上篇文章 <a href="http://icuihai.com/2018/03/30/交叉编译-Mac环境使用NDK编译FFmpeg/">交叉编译-Mac环境使用NDK编译FFmpeg</a></p>
+<h5 id="我的编译环境："><a href="#我的编译环境：" class="headerlink" title="我的编译环境："></a>我的编译环境：</h5><ul>
+<li>FFmpeg 3.0.11 (之前我用最新版3.3.4编译失败)</li>
+<li>macOS 10.13.2</li>
+<li>NDK android-ndk-r14b</li>
+<li>Android Studio 3.0</li>
+</ul>
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>大致分为以下几个步骤：</p>
+<h5 id="1-编写native方法"><a href="#1-编写native方法" class="headerlink" title="1. 编写native方法"></a>1. 编写native方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">run</span><span class="params">(String[] commands)</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="2-加载静态代码块"><a href="#2-加载静态代码块" class="headerlink" title="2. 加载静态代码块"></a>2. 加载静态代码块</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">        System.loadLibrary(<span class="string">"avutil-55"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"avformat-57"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"swresample-2"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"swscale-4"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"avcodec-57"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"avfilter-6"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"avdevice-57"</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">"ffmpeg"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-在main文件夹下新建jni文件夹和jniLibs文件夹b并且导入之前编译好的so文件和include文件"><a href="#3-在main文件夹下新建jni文件夹和jniLibs文件夹b并且导入之前编译好的so文件和include文件" class="headerlink" title="3. 在main文件夹下新建jni文件夹和jniLibs文件夹b并且导入之前编译好的so文件和include文件"></a>3. 在main文件夹下新建jni文件夹和jniLibs文件夹b并且导入之前编译好的so文件和include文件</h5><ul>
+<li>cd到native路径下利用javah生成.h头文件并拷贝到jni目录下</li>
+<li>编写相同名字的.c文件并且#include 上一步生成的.h文件</li>
+</ul>
+<h5 id="4-修改源文件（以下文件都在jni目录下）"><a href="#4-修改源文件（以下文件都在jni目录下）" class="headerlink" title="4. 修改源文件（以下文件都在jni目录下）"></a>4. 修改源文件（以下文件都在jni目录下）</h5><p>从ffmpeg源码中拷贝ffmpeg.h、ffmpeg.c、ffmpeg_opt.c、ffmpeg_filter.c、cmdutils.c、cmdutils.h 以及 cmdutils_common_opts.h 共 7 个文件到 jni 目录下，为了将日志输出函数简化为简洁的 “LOGD”、 “LOGE”，需要在jni目录西下新建android_log.h 文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ANDROID</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> LOG_TAG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  MY_TAG   <span class="meta-string">"MYTAG"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  AV_TAG   <span class="meta-string">"AVLOG"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGE(format, ...)  __android_log_print(ANDROID_LOG_ERROR, MY_TAG, format, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(format, ...)  __android_log_print(ANDROID_LOG_DEBUG,  MY_TAG, format, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  XLOGD(...)  __android_log_print(ANDROID_LOG_INFO,AV_TAG,__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  XLOGE(...)  __android_log_print(ANDROID_LOG_ERROR,AV_TAG,__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGE(format, ...)  printf(MY_TAG format <span class="meta-string">"\n"</span>, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(format, ...)  printf(MY_TAG format <span class="meta-string">"\n"</span>, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XLOGE(format, ...)  fprintf(stdout, AV_TAG <span class="meta-string">": "</span> format <span class="meta-string">"\n"</span>, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XLOGI(format, ...)  fprintf(stderr, AV_TAG <span class="meta-string">": "</span> format <span class="meta-string">"\n"</span>, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>先贴下我的目录吧：</p>
+<p><img src="http://p6nix480q.bkt.clouddn.com/18-4-4/80850158.jpg" alt=""></p>
+<ul>
+<li>首先修改 ffmpeg.c</li>
+</ul>
+<ol>
+<li>导入include “android_log.h”</li>
+<li>修改 log_callback_null 方法为下：（原方法为空）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">log_callback_null</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span> *fmt, va_list vl)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> print_prefix = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> prev[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">char</span> line[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> is_atty;</span><br><span class="line">    av_log_format_line(ptr, level, fmt, vl, line, <span class="keyword">sizeof</span>(line), &amp;print_prefix);</span><br><span class="line">    <span class="built_in">strcpy</span>(prev, line);</span><br><span class="line">    <span class="keyword">if</span> (level &lt;= AV_LOG_WARNING)&#123;</span><br><span class="line">        XLOGE(<span class="string">"%s"</span>, line);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        XLOGD(<span class="string">"%s"</span>, line);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>设置日志回调方法为 log_callback_null：（main 函数开始处）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    av_log_set_callback(log_callback_null);</span><br><span class="line">    <span class="keyword">int</span> i, ret</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>找到 ffmpeg.c 的 ffmpeg_cleanup 方法，在该方法的末尾添加以下代码：</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nb_filtergraphs = <span class="number">0</span>;</span><br><span class="line">nb_output_files = <span class="number">0</span>;</span><br><span class="line">nb_output_streams = <span class="number">0</span>;</span><br><span class="line">nb_input_files = <span class="number">0</span>;</span><br><span class="line">nb_input_streams = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>最后在 main 函数的最后执行 ffmpeg_cleanup 方法，如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  	 ffmpeg_cleanup(0);</span><br><span class="line">    return main_return_code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>执行结束后不结束进程（修改 cmdutils.c、cmdutils.h）</p>
+<p>由于FFmpeg在执行结束或者遇到异常就会结束进程，但是我们还要Android接着用啊，怎么办呢？那就不让它销毁进程只正常返回就行了，就要需要修改 cmdutils.c 中的 exit_program 方法</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit_program</span><span class="params">(<span class="keyword">int</span> ret)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (program_exit)</span><br><span class="line">        program_exit(ret);</span><br><span class="line">    <span class="built_in">exit</span>(ret);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exit_program</span><span class="params">(<span class="keyword">int</span> ret)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然.h方法声明也要改哦，即修改cmdutils.h 中的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void exit_program(int ret) av_noreturn;</span><br></pre></td></tr></table></figure>
+<p>为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int exit_program(int ret);</span><br></pre></td></tr></table></figure>
+<p>到这里我们就把源码修改完了（当然这部分网上一搜一大堆），然后就是编写Android.mk和Applicaton.mk文件了，在这里我贴上我的Android.mk</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH:= $(call my-dir)</span><br><span class="line">#编译好的 FFmpeg 头文件目录</span><br><span class="line">INCLUDE_PATH:=/Users/CH/Work/FFmpeg/app/src/main/jniLibs/include</span><br><span class="line">#编译好的 FFmpeg 动态库目录</span><br><span class="line">FFMPEG_LIB_PATH:=/Users/CH/Work/FFmpeg/app/src/main/jniLibs/armeabi-v7a</span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libavcodec</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libavcodec<span class="number">-57.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"> </span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libavformat</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libavformat<span class="number">-57.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"> </span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libswscale</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libswscale<span class="number">-4.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"> </span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libavutil</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libavutil<span class="number">-55.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"> </span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libavfilter</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libavfilter<span class="number">-6.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"> </span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libswresample</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libswresample<span class="number">-2.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE:= libavdevice</span><br><span class="line">LOCAL_SRC_FILES:= $(FFMPEG_LIB_PATH)/libavdevice<span class="number">-57.</span>so</span><br><span class="line">LOCAL_EXPORT_C_INCLUDES := $(INCLUDE_PATH)</span><br><span class="line">include $(PREBUILT_SHARED_LIBRARY)</span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">#要生成的so文件名字  </span><br><span class="line">LOCAL_MODULE := ffmpeg</span><br><span class="line">LOCAL_SRC_FILES := com_example_ch_ffmpeg_FFmpeg.c \</span><br><span class="line">                  cmdutils.c \</span><br><span class="line">                  ffmpeg.c \</span><br><span class="line">                  ffmpeg_opt.c \</span><br><span class="line">                  ffmpeg_filter.c   </span><br><span class="line">#源码文件             </span><br><span class="line">LOCAL_C_INCLUDES := /Users/CH/Learn/ffmpeg<span class="number">-3.0</span><span class="number">.11</span></span><br><span class="line">LOCAL_LDLIBS := -lm -llog</span><br><span class="line">LOCAL_SHARED_LIBRARIES := libavcodec libavfilter libavformat libavutil libswresample libswscale libavdevice</span><br><span class="line">include $(BUILD_SHARED_LIBRARY)</span><br></pre></td></tr></table></figure>
+<p>Application.mk</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">APP_ABI := armeabi-v7a</span><br><span class="line">APP_PLATFORM=android<span class="number">-14</span></span><br><span class="line">NDK_TOOLCHAIN_VERSION=<span class="number">4.9</span></span><br></pre></td></tr></table></figure>
+<p>到这里准备工作已经完成,cd到jni路径下执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ndk-build</span><br></pre></td></tr></table></figure>
+<p>然后就可以在java文件下下生成了两个文件夹libs和obj</p>
+<h4 id="在应用中加载so文件"><a href="#在应用中加载so文件" class="headerlink" title="在应用中加载so文件"></a>在应用中加载so文件</h4><p>我们拷贝上一步生成的libs到app目录下的libs，并且在应用的 build.gradle 文件中 android 节点下添加动态库加载路径，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line">            jni.srcDirs = []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>和defaultConfig节点下(我这里引入的v7)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndk &#123;</span><br><span class="line">    abiFilters  <span class="string">"armeabi-v7a"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里全部工作已经完成，接下来就到了就像Mac端使用命令操作音视频的步骤了，比如音频截取，拼接，等。这里我写了一个音频截取的Demo（当然是我工作中需要用到才写的了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">~~~ java</span><br><span class="line">public void run() &#123;</span><br><span class="line">        ...</span><br><span class="line">        soundFile1 = new File(soundFileDir.getPath() + &quot;/&quot; + &quot;V7ExT5s88_13&quot; + &quot;.aac&quot;);</span><br><span class="line">        soundFile2 = new File(soundFileDir.getPath() + &quot;/&quot; + &quot;V7ExT5s88_14&quot; + &quot;.aac&quot;);</span><br><span class="line">        String[] commands = new String[10];</span><br><span class="line">        commands[0] = &quot;ffmpeg&quot;;</span><br><span class="line">        commands[1] = &quot;-i&quot;;</span><br><span class="line">        commands[2] = soundFile1.getAbsolutePath();</span><br><span class="line">        commands[3] = &quot;-ss&quot;;</span><br><span class="line">        commands[4] = &quot;00:00:10&quot;;</span><br><span class="line">        commands[5] = &quot;-t&quot;;</span><br><span class="line">        commands[6] = &quot;00:00:20&quot;;</span><br><span class="line">        commands[7] = &quot;-acodec&quot;;</span><br><span class="line">        commands[8] = &quot;copy&quot;;</span><br><span class="line">        commands[9] = soundFile2.getAbsolutePath();</span><br><span class="line">        int result = FFmpeg.run(commands);</span><br><span class="line">        if (result == 0) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;命令行执行完成&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>首先在编写Android.mk时候路径要要一定要写对，不能对不上</li>
+<li>修改 cmdutils.c 中的 exit_program 方法时一定要注意void和int（这个问题困扰了我一上午，硬是找不到哪里错了~~~）</li>
+<li>armeabi-v7a和armeabi不一样，无论是在Android.mk或者libs都要注意要对应起来</li>
+<li>还有好多问题想起来再说吧</li>
+</ul>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/FFmpeg/">#FFmpeg</a> <a class="fw3 ph1 dib" href="/tags/JNI/">#JNI</a>
+                        </div>
+                    
+
+                    <!-- Comments -->
+                    
 
 
 
-block mainContent
-	main#main-content-column
-		#main-content-wrapper
-			#post-full-content!= page.content
-			include includes/post-tags
-			include includes/post-categories
-		
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="icuihai">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            My name is Jonathan Klughertz and this is my blog.<br>I am a full stack software engineer with a strong front-end focus.<br> I currently live and work in Singapore, hit me up if you are in the region.
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/07/19/全网最清晰的ConstraintLayout教程/">全网最清晰的ConstraintLayout教程</a>
+        </p>
+    
+        <p>
+            <a href="/2018/06/27/Android7-1-1Toast崩溃解决方案/">Android7.1.1Toast崩溃解决方案</a>
+        </p>
+    
+        <p>
+            <a href="/2018/04/04/编译Android下可执行命令的FFmpeg/">编译Android下可执行命令的FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/30/交叉编译-Mac环境使用NDK编译FFmpeg/">交叉编译-Mac环境使用NDK编译FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/15/使用Hexo搭建免费Blog/">使用Hexo搭建免费Blog</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://github.com/klugjo/hexo-theme-anodyne" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
+                            <i class="fa fa-500px"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:test@example.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

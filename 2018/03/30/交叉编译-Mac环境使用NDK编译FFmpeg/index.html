@@ -1,19 +1,334 @@
-extends includes/layout.pug
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="概述FFmpeg是一套非常强大的音视频处理工具，在音视频领域绝对是一个元老级的存在，围绕FFmpeh可以进行音视频编解码，裁剪，拼接等操作。今天的主题就是使用NDK进行教交叉编译，生成so文件在Android上使用
+我的编译环境：
+FFmpeg v3.0.11 (之前测试最新版3.3.4编译失败)
+">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="icuihai">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="交叉编译-Mac环境使用NDK编译FFmpeg"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="ICH"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>交叉编译-Mac环境使用NDK编译FFmpeg - ICH</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
 
 
-block TOC
-	aside#toc-column
-		//- 这个block的渲染与否取决于当前视窗的宽度，具体的控制在scss文件里头实现。
-		#toc-column-inner-wrapper
-			- var contentsOptions = {list_number: theme.toc.list_number_on};
-			#post-toc!= toc(page.content, contentsOptions)
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="ICH">
+            <img src="http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg" class="dib h3" alt="ICH">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/" 
+                    title="Home">
+                    Home
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/archives" 
+                    title="Archives">
+                    Archives
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/tags" 
+                    title="Tags">
+                    Tags
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/categories" 
+                    title="Categories">
+                    Categories
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/about.html" 
+                    title="About">
+                    About
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/contact.html" 
+                    title="Contact">
+                    Contact
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">交叉编译-Mac环境使用NDK编译FFmpeg</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-03-30</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/FFmpeg/">#FFmpeg</a> <a class="fw3 ph1 dib" href="/tags/JNI/">#JNI</a>
+                            </div>
+                        </div>
+                    
+
+                    <!-- Main Post Content -->
+                    <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>FFmpeg是一套非常强大的音视频处理工具，在音视频领域绝对是一个元老级的存在，围绕FFmpeh可以进行音视频编解码，裁剪，拼接等操作。<br>今天的主题就是使用NDK进行教交叉编译，生成so文件在Android上使用</p>
+<h5 id="我的编译环境："><a href="#我的编译环境：" class="headerlink" title="我的编译环境："></a>我的编译环境：</h5><ul>
+<li>FFmpeg v3.0.11 (之前测试最新版3.3.4编译失败)</li>
+<li>macOS </li>
+<li>NDK android-ndk-r14b</li>
+<li>Android Studio 3.1</li>
+</ul>
+<h3 id="下载FFmpeg源码"><a href="#下载FFmpeg源码" class="headerlink" title="下载FFmpeg源码"></a>下载FFmpeg源码</h3><p>FFmpeg官网下载：<a href="https://www.ffmpeg.org/download.html" target="_blank" rel="noopener">https://www.ffmpeg.org/download.html</a></p>
+<p>也可以Git下载 git clone <a href="https://git.ffmpeg.org/ffmpeg.git" target="_blank" rel="noopener">https://git.ffmpeg.org/ffmpeg.git</a> ffmpeg </p>
+<h3 id="配置脚本"><a href="#配置脚本" class="headerlink" title="配置脚本"></a>配置脚本</h3><p>默认编译出来的so库版本号是在.so之后，Android识别不了，所以要修改configure文件</p>
+<p>使用sublime打开configure，大概在3305行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SLIBNAME_WITH_MAJOR=&apos;$(SLIBNAME).$(LIBMAJOR)&apos;</span><br><span class="line">LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB) &quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;</span><br><span class="line">SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_VERSION)&apos;</span><br><span class="line">SLIB_INSTALL_LINKS=&apos;$(SLIBNAME_WITH_MAJOR) $(SLIBNAME)&apos;</span><br></pre></td></tr></table></figure>
+<p>把上面几行直接改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SLIBNAME_WITH_MAJOR=&apos;$(SLIBPREF)$(FULLNAME)$(LIBMAJOR)$(SLIBSUF)&apos; </span><br><span class="line">LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB)&quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;  </span><br><span class="line">SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_MAJOR)&apos;  </span><br><span class="line">SLIB_INSTALL_LINKS=&apos;$(SLIBNAME)&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="配置build-android-sh"><a href="#配置build-android-sh" class="headerlink" title="配置build_android.sh"></a>配置build_android.sh</h3><p>这个文件需要自己在FFmpeg根目录下手动创建，直接在sublime新建一个.sh文件。此脚本网上很多，大部分可以直接拿过来使用，但是要注意修改NDK目录。下面我提供一个修改之后的脚本以供参考</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ndk环境   </span></span><br><span class="line">export NDK=/Users/CH/Learn/android-ndk-r14b</span><br><span class="line">export SYSROOT=$NDK/platforms/android<span class="number">-14</span>/arch-arm</span><br><span class="line">export TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi<span class="number">-4.9</span>/prebuilt/darwin-x86_64</span><br><span class="line">CPU=armv7-a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要保存动态库的目录，这里保存在源码根目录下的android/armv7-a</span></span><br><span class="line">export PREFIX=$(pwd)/android/$CPU</span><br><span class="line">ADDI_CFLAGS=<span class="string">"-marm"</span></span><br><span class="line">function build_android</span><br><span class="line">&#123;</span><br><span class="line">./configure </span><br><span class="line">	--target-os=linux </span><br><span class="line">	--prefix=$PREFIX \</span><br><span class="line">    --enable-cross-compile \</span><br><span class="line">    --enable-shared \</span><br><span class="line">    --disable-static \</span><br><span class="line">    --disable-doc \</span><br><span class="line">    --disable-ffmpeg \</span><br><span class="line">    --disable-ffplay \</span><br><span class="line">    --disable-ffprobe \</span><br><span class="line">    --disable-ffserver \</span><br><span class="line">    --enable-avdevice \</span><br><span class="line">    --disable-doc \</span><br><span class="line">    --disable-symver \</span><br><span class="line">    --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</span><br><span class="line">    --arch=arm \</span><br><span class="line">    --sysroot=$SYSROOT \</span><br><span class="line">    --extra-cflags=<span class="string">"-Os -fpic $ADDI_CFLAGS"</span> \</span><br><span class="line">    --extra-ldflags=<span class="string">"$ADDI_LDFLAGS"</span> \</span><br><span class="line">    $ADDITIONAL_CONFIGURE_FLAG</span><br><span class="line">make clean</span><br><span class="line"><span class="comment"># 不确定自己上面的目录或者环境有没有错误时</span></span><br><span class="line"><span class="comment"># 可以先注释一下下面两个命令</span></span><br><span class="line"><span class="comment"># make</span></span><br><span class="line"><span class="comment"># make install</span></span><br><span class="line">&#125;</span><br><span class="line">build_android</span><br></pre></td></tr></table></figure>
+<h3 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h3><p>进入到脚本根目录，如果你是第一次执行可能会提示权限不足,如下：</p>
+<p><em>Permission denied</em></p>
+<p>授予权限即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod <span class="number">777</span> build_android.sh</span><br></pre></td></tr></table></figure>
+<p>然后重新执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build_android.sh</span><br></pre></td></tr></table></figure>
+<p>此处如果脚本文件环境配置正常会提示一个WARNING，不用管它继续执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>大概15分钟之后执行结束根目录下你配置的输出目录下看到.so文件和头文件两个文件夹,如下图：</p>
+<p><img src="http://p6nix480q.bkt.clouddn.com/18-4-4/90143872.jpg" alt=""></p>
+<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><p>尽量先执行./build_android 确认配置无问题在执行  make 和 makeinstall 因为编译一次大概十几分钟。所以说一定先确认环境，目录无问题在执行 make</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><h5 id="1-在执行-build-android-sh-时报错如下"><a href="#1-在执行-build-android-sh-时报错如下" class="headerlink" title="1 .在执行./build_android.sh 时报错如下"></a>1 .在执行./build_android.sh 时报错如下</h5><p><em>nasm/yasm not found or too old. Use –disable-x86asm for a crippled build</em></p>
+<p>那就说明你没有安装汇编工具yasm</p>
+<p>直接在终端执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install yasm</span><br></pre></td></tr></table></figure>
+<p>即可安装</p>
+<h5 id="2-在输出目录时报错大概如下"><a href="#2-在输出目录时报错大概如下" class="headerlink" title="2.在输出目录时报错大概如下"></a>2.在输出目录时报错大概如下</h5><p><em>No such file or directory make: Error 127</em></p>
+<p>这说明你的输出目录找不到，尽量不要把输出目录建在系统下。还有一点最好手动把输出目录设置为可读写（虽然可能已经是可读写了~）</p>
+<h5 id="3-新版本FFpmeg编译失败"><a href="#3-新版本FFpmeg编译失败" class="headerlink" title="3.新版本FFpmeg编译失败"></a>3.新版本FFpmeg编译失败</h5><p>目前在我编译过程中最新版本3.4.2是不行的，我目前使用的是3.0.11</p>
+<h5 id="4-最好不要使用androidstudio下载的ndk"><a href="#4-最好不要使用androidstudio下载的ndk" class="headerlink" title="4.最好不要使用androidstudio下载的ndk"></a>4.最好不要使用androidstudio下载的ndk</h5><p>到官网手动 下载ndk（我使用的是android-ndk-r14b）</p>
+<p><a href="https://developer.android.google.cn/ndk/downloads/older_releases.html#ndk-14b-downloads" target="_blank" rel="noopener">https://developer.android.google.cn/ndk/downloads/older_releases.html#ndk-14b-downloads</a></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>编译过程中一定要耐心再耐心~特别像我这种不会C不会Linux的，简直是在看天书各种google，下一篇会讲述把so包集成到Android中。</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/FFmpeg/">#FFmpeg</a> <a class="fw3 ph1 dib" href="/tags/JNI/">#JNI</a>
+                        </div>
+                    
+
+                    <!-- Comments -->
+                    
 
 
 
-block mainContent
-	main#main-content-column
-		#main-content-wrapper
-			#post-full-content!= page.content
-			include includes/post-tags
-			include includes/post-categories
-		
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="icuihai">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            My name is Jonathan Klughertz and this is my blog.<br>I am a full stack software engineer with a strong front-end focus.<br> I currently live and work in Singapore, hit me up if you are in the region.
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/07/19/全网最清晰的ConstraintLayout教程/">全网最清晰的ConstraintLayout教程</a>
+        </p>
+    
+        <p>
+            <a href="/2018/06/27/Android7-1-1Toast崩溃解决方案/">Android7.1.1Toast崩溃解决方案</a>
+        </p>
+    
+        <p>
+            <a href="/2018/04/04/编译Android下可执行命令的FFmpeg/">编译Android下可执行命令的FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/30/交叉编译-Mac环境使用NDK编译FFmpeg/">交叉编译-Mac环境使用NDK编译FFmpeg</a>
+        </p>
+    
+        <p>
+            <a href="/2018/03/15/使用Hexo搭建免费Blog/">使用Hexo搭建免费Blog</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://github.com/klugjo/hexo-theme-anodyne" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
+                            <i class="fa fa-500px"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:test@example.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
