@@ -147,7 +147,7 @@ EventBus是我们在开发中经常使用的开源库，使用起来比较简单
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/Android/">#Android</a> <a class="fw3 ph1 dib" href="/tags/源码/">#源码</a>
+                                <a class="fw3 ph1 dib" href="/tags/源码/">#源码</a> <a class="fw3 ph1 dib" href="/tags/Android/">#Android</a>
                             </div>
                         </div>
                     
@@ -156,7 +156,7 @@ EventBus是我们在开发中经常使用的开源库，使用起来比较简单
                     <h1 id="EventBus源码理解"><a href="#EventBus源码理解" class="headerlink" title="EventBus源码理解"></a>EventBus源码理解</h1><blockquote>
 <p>EventBus是我们在开发中经常使用的开源库，使用起来比较简单，而且源码看起来不是很吃力。受到广大开发者的喜爱~</p>
 </blockquote>
-<p>综述<a href="http://icuihai.com/2016/09/20/EventBus%E6%BA%90%E7%A0%81%E7%90%86%E8%A7%A3/EventBus-Publish-Subscribe.png"><img src="http://icuihai.com/2016/09/20/EventBus%E6%BA%90%E7%A0%81%E7%90%86%E8%A7%A3/EventBus-Publish-Subscribe.png" alt="Alt text"></a><br>上面这张图片很好的解释了EventBus工作流程，简单来说就是事件被提交到EventBus之后进行查找所有订阅该事件的方法然后执行这些方法.</p>
+<p>综述<a href="http://icuihai.com/2016/09/20/EventBus%E6%BA%90%E7%A0%81%E7%90%86%E8%A7%A3/EventBus-Publish-Subscribe.png" target="_blank" rel="noopener"><img src="http://icuihai.com/2016/09/20/EventBus%E6%BA%90%E7%A0%81%E7%90%86%E8%A7%A3/EventBus-Publish-Subscribe.png" alt="Alt text"></a><br>上面这张图片很好的解释了EventBus工作流程，简单来说就是事件被提交到EventBus之后进行查找所有订阅该事件的方法然后执行这些方法.</p>
 <p>###获取EventBus实例（单例模式）</p>
 <h4 id="使用了双重判断的方式，防止并发的问题，还能极大的提高效率。"><a href="#使用了双重判断的方式，防止并发的问题，还能极大的提高效率。" class="headerlink" title="使用了双重判断的方式，防止并发的问题，还能极大的提高效率。"></a>使用了双重判断的方式，防止并发的问题，还能极大的提高效率。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EventBus <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (defaultInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (EventBus.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (defaultInstance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    defaultInstance = <span class="keyword">new</span> EventBus();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> defaultInstance;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EventBus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(DEFAULT_BUILDER);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -179,7 +179,7 @@ EventBus是我们在开发中经常使用的开源库，使用起来比较简单
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/Android/">#Android</a> <a class="fw3 ph1 dib" href="/tags/源码/">#源码</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/源码/">#源码</a> <a class="fw3 ph1 dib" href="/tags/Android/">#Android</a>
                         </div>
                     
 
